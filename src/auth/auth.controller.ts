@@ -12,7 +12,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { RegisterRequestDto } from './dtos/register-request.dto';
 import { LoginResponseDTO } from './dtos/login-response.dto';
 import { RegisterResponseDTO } from './dtos/register-response.dto';
+import { Public } from './decorators/public.decorator';
 
+@Public()
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
