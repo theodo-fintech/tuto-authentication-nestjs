@@ -1,15 +1,13 @@
-import { Controller, Get, Request } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AccessTokenPayload } from './auth/types/AccessTokenPayload';
+import { User } from './auth/decorators/user.decorator';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  async getHello(@Request() req): Promise<string> {
-    const accessTokenPayload: AccessTokenPayload =
-      req.user as AccessTokenPayload;
-    return await this.appService.getHello(accessTokenPayload.userId);
+  async getHello(@User() user): Promise<string> {
+    return await this.appService.getHello(user.id);
   }
 }
