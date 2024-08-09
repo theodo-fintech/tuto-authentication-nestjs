@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   async register(user: RegisterRequestDto): Promise<AccessToken> {
-    const existingUser = this.usersService.findOneByEmail(user.email);
+    const existingUser = await this.usersService.findOneByEmail(user.email);
     if (existingUser) {
       throw new BadRequestException('email already exists');
     }
