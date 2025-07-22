@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
+import { OAuthUser } from '../auth/oauth/types/oauth-user.type';
 
 @Injectable()
 export class UsersService {
@@ -28,6 +29,18 @@ export class UsersService {
     return this.prisma.user.update({
       where: { id },
       data,
+    });
+  }
+
+  createFromOAuthUser(oauthUser: OAuthUser): Promise<User> {
+    return this.prisma.user.create({
+      data: {
+        email: oauthUser.email,
+        firstName: oauthUser.firstName,
+        lastName: oauthUser.lastName,
+        isOAuthUser: true,
+        password: null,
+      },
     });
   }
 }

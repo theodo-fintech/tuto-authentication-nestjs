@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { OAuthProviderInterface } from '../interfaces/oauth-provider.interface';
 import { OAuthProviderName } from '../types/oauth-provider-config.type';
 import { GoogleOAuthProvider } from './google-oauth.provider';
@@ -21,7 +21,7 @@ export class OAuthProviderFactory {
   getProvider(name: OAuthProviderName): OAuthProviderInterface {
     const provider = this.providers.get(name);
     if (!provider) {
-      throw new Error(`OAuth provider ${name} not found`);
+      throw new NotFoundException(`OAuth provider ${name} not found`);
     }
     return provider;
   }

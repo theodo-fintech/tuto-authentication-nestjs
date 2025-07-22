@@ -10,9 +10,12 @@ import { OAuthController } from './oauth/oauth.controller';
 import { OAuthService } from './oauth/oauth.service';
 import { GoogleOAuthProvider } from './oauth/providers/google-oauth.provider';
 import { OAuthProviderFactory } from './oauth/providers/oauth-provider.factory';
+import { OAuthAccountsService } from './oauth/oauth-accounts.service';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [
+    PrismaModule,
     UsersModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -35,6 +38,7 @@ import { OAuthProviderFactory } from './oauth/providers/oauth-provider.factory';
     LocalStrategy,
     JwtStrategy,
     OAuthService,
+    OAuthAccountsService,
     GoogleOAuthProvider,
     OAuthProviderFactory,
   ],
