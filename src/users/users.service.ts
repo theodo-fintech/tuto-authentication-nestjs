@@ -1,29 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
-import { User } from './users.entity';
-import { UUID } from 'crypto';
+import { PrismaService } from '../prisma/prisma.service';
+import { User, Prisma } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   findOneByEmail(email: string): Promise<User | null> {
-    return this.usersRepository.findOneBy({ email });
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
   }
 
-  findOneById(id: UUID): Promise<User | null> {
-    return this.usersRepository.findOneBy({ id });
+  findOneById(id: number): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: { id },
+    });
   }
 
-  create(user: User): Promise<User> {
-    return this.usersRepository.save(user);
+  create(data: Prisma.UserCreateInput): Promise<User> {
+    return this.prisma.user.create({
+      data,
+    });
   }
 
-  update(userId: UUID, userInformation: Partial<User>): Promise<UpdateResult> {
-    return this.usersRepository.update(userId, userInformation);
+  update(id: number, data: Prisma.UserUpdateInput): Promise<User> {
+    return this.prisma.user.update({
+      where: { id },
+      data,
+    });
   }
 }
