@@ -9,6 +9,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 import { OAuthController } from './oauth/oauth.controller';
 import { OAuthService } from './oauth/oauth.service';
 import { GoogleOAuthProvider } from './oauth/providers/google-oauth.provider';
+import { GitHubOAuthProvider } from './oauth/providers/github-oauth.provider';
 import { OAuthProviderFactory } from './oauth/providers/oauth-provider.factory';
 import { OAuthAccountsService } from './oauth/oauth-accounts.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
@@ -40,6 +41,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
     OAuthService,
     OAuthAccountsService,
     GoogleOAuthProvider,
+    GitHubOAuthProvider,
     OAuthProviderFactory,
   ],
   exports: [AuthService, JwtModule],

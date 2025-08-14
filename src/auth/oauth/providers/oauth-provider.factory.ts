@@ -2,13 +2,18 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { OAuthProviderInterface } from '../interfaces/oauth-provider.interface';
 import { OAuthProviderName } from '../types/oauth-provider-config.type';
 import { GoogleOAuthProvider } from './google-oauth.provider';
+import { GitHubOAuthProvider } from './github-oauth.provider';
 
 @Injectable()
 export class OAuthProviderFactory {
   private providers = new Map<OAuthProviderName, OAuthProviderInterface>();
 
-  constructor(private googleProvider: GoogleOAuthProvider) {
+  constructor(
+    private googleProvider: GoogleOAuthProvider,
+    private githubProvider: GitHubOAuthProvider,
+  ) {
     this.registerProvider('google', this.googleProvider);
+    this.registerProvider('github', this.githubProvider);
   }
 
   registerProvider(
