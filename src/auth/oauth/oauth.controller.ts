@@ -1,5 +1,10 @@
-import { Controller, Get, Param, Query, Res } from '@nestjs/common';
-import { Response } from 'express';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { Public } from '../decorators/public.decorator';
 import { OAuthService } from './oauth.service';
 import { OAuthProviderName } from './types/oauth-provider-config.type';
@@ -23,15 +28,15 @@ export class OAuthController {
     @Param('provider') providerName: OAuthProviderName,
     @Query('code') code: string,
     @Query('error') error: string,
-    @Res() response: Response,
-  ): Promise<AccessToken | Response> {
+  ): Promise<AccessToken> {
     if (error) {
-      return response.status(400).json({ error: 'OAuth authorization failed' });
+      throw new BadRequestException('OAuth authorization failed');
     }
 
     if (!code) {
-      return response.status(400).json({ error: 'Authorization code missing' });
+      throw new BadRequestException('Authorization code missing');
     }
+
     return await this.oauthService.handleOAuthCallback(providerName, code);
   }
 }
