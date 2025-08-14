@@ -3,6 +3,7 @@ import { OAuthProviderInterface } from '../interfaces/oauth-provider.interface';
 import { OAuthProviderName } from '../types/oauth-provider-config.type';
 import { GoogleOAuthProvider } from './google-oauth.provider';
 import { GitHubOAuthProvider } from './github-oauth.provider';
+import { MicrosoftOAuthProvider } from './microsoft-oauth.provider';
 
 @Injectable()
 export class OAuthProviderFactory {
@@ -11,9 +12,11 @@ export class OAuthProviderFactory {
   constructor(
     private googleProvider: GoogleOAuthProvider,
     private githubProvider: GitHubOAuthProvider,
+    private microsoftProvider: MicrosoftOAuthProvider,
   ) {
     this.registerProvider('google', this.googleProvider);
     this.registerProvider('github', this.githubProvider);
+    this.registerProvider('microsoft', this.microsoftProvider);
   }
 
   registerProvider(
