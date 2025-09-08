@@ -1,0 +1,19 @@
+meta {
+  name: Google OAuth - Get Authorization URL
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/oauth/google
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Get Google OAuth2 authorization URL to redirect user for authentication
+}

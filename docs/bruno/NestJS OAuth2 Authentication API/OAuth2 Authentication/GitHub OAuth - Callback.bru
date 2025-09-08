@@ -1,0 +1,24 @@
+meta {
+  name: GitHub OAuth - Callback
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base_url}}/oauth/github/callback?code={{auth_code}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  code: {{auth_code}}
+  ~error: 
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Handle GitHub OAuth2 callback with authorization code to get JWT token
+}

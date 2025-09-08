@@ -8,7 +8,6 @@ This repository demonstrates a comprehensive implementation of authentication an
 
 - 🔐 **JWT-based Authentication** with configurable token expiration
 - 🌐 **Multi-Provider OAuth2** (Google, GitHub, Microsoft)
-- 🔗 **Account Linking** - Users can authenticate with multiple providers
 - 🛡️ **Global Authentication Guards** with selective public routes
 - 📊 **Modern Database Integration** using Prisma ORM
 - 🏗️ **Scalable Architecture** with Provider Pattern for easy extensibility
@@ -16,7 +15,7 @@ This repository demonstrates a comprehensive implementation of authentication an
 
 Check out the related article [here](https://www.sipios.com/blog-posts/implementing-authentication-in-nestjs-using-passport-and-jwt) 😊
 
-![image](https://github.com/sipios/tuto-authentication-nestjs/assets/129767301/50ef3c15-d4da-4eb9-ba9b-b196c84aa9e4)
+![image](docs/architecture-schema.png)
 
 ## Installation
 
@@ -67,6 +66,10 @@ npx prisma generate
 # Run database migrations
 npx prisma migrate dev
 ```
+
+## Testing
+
+A Bruno collection is provided in the repository for API testing purposes. Import the collection into Bruno to test all available authentication endpoints.
 
 ## Stay in touch
 

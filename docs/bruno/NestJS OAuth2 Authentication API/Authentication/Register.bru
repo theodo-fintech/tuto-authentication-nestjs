@@ -1,0 +1,32 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/auth/register
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "password": "SecurePassword123!"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Register a new user with email and password
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Microsoft OAuth - Get Authorization URL
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{base_url}}/oauth/microsoft
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Get Microsoft OAuth2 authorization URL to redirect user for authentication
+}
