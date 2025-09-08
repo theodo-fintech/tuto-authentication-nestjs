@@ -6,13 +6,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalStrategy } from './strategy/local.strategy';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategy/jwt.strategy';
-import { OAuthController } from './oauth/oauth.controller';
-import { OAuthService } from './oauth/oauth.service';
-import { GoogleOAuthProvider } from './oauth/providers/google-oauth.provider';
-import { GitHubOAuthProvider } from './oauth/providers/github-oauth.provider';
-import { MicrosoftOAuthProvider } from './oauth/providers/microsoft-oauth.provider';
-import { OAuthProviderFactory } from './oauth/providers/oauth-provider.factory';
-import { OAuthAccountsService } from './oauth/oauth-accounts.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
@@ -34,18 +27,8 @@ import { PrismaModule } from 'src/prisma/prisma.module';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController, OAuthController],
-  providers: [
-    AuthService,
-    LocalStrategy,
-    JwtStrategy,
-    OAuthService,
-    OAuthAccountsService,
-    GoogleOAuthProvider,
-    GitHubOAuthProvider,
-    MicrosoftOAuthProvider,
-    OAuthProviderFactory,
-  ],
+  controllers: [AuthController],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

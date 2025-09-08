@@ -10,19 +10,19 @@ import { OAuthService } from './oauth.service';
 import { OAuthProviderName } from './types/oauth-provider-config.type';
 import { AccessToken } from '../types/AccessToken';
 
+@Public()
 @Controller('oauth')
 export class OAuthController {
   constructor(private oauthService: OAuthService) {}
 
-  @Public()
   @Get(':provider')
-  async authorize(
-    @Param('provider') providerName: OAuthProviderName,
-  ): Promise<string> {
-    return await this.oauthService.getAuthorizationUrl(providerName);
+  async authorize(@Param('provider') providerName: OAuthProviderName) {
+    return {
+      authorizationUrl:
+        await this.oauthService.getAuthorizationUrl(providerName),
+    };
   }
 
-  @Public()
   @Get(':provider/callback')
   async callback(
     @Param('provider') providerName: OAuthProviderName,

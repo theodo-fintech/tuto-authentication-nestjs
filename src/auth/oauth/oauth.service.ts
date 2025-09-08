@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { OAuthUser } from './types/oauth-user.type';
 import { OAuthProviderName } from './types/oauth-provider-config.type';
-import { AuthService } from '../auth.service';
 import { OAuthProviderFactory } from './providers/oauth-provider.factory';
-import { OAuthAccountsService } from './oauth-accounts.service';
 import { UsersService } from 'src/users/users.service';
 import { AccessToken } from '../types/AccessToken';
+import { AuthService } from '../auth.service';
+import { OAuthAccountsService } from './oauth-accounts.service';
 
 @Injectable()
 export class OAuthService {
@@ -31,7 +31,7 @@ export class OAuthService {
     return this.authService.login(user);
   }
 
-  async handleOAuthLogin(
+  private async handleOAuthLogin(
     provider: OAuthProviderName,
     oauthUser: OAuthUser,
   ): Promise<User> {
