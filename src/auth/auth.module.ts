@@ -6,9 +6,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalStrategy } from './strategy/local.strategy';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [
+    PrismaModule,
     UsersModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { User } from 'src/users/users.entity';
+import { User } from '@prisma/client';
 import { AccessToken } from './types/AccessToken';
 import { UsersService } from 'src/users/users.service';
 import { RegisterRequestDto } from './dtos/register-request.dto';
@@ -36,8 +36,12 @@ export class AuthService {
       throw new BadRequestException('email already exists');
     }
     const hashedPassword = await bcrypt.hash(user.password, 10);
-    const newUser: User = { ...user, password: hashedPassword };
-    await this.usersService.create(newUser);
+    const newUser = await this.usersService.create({
+      email: user.email,
+      password: hashedPassword,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
     return this.login(newUser);
   }
 }

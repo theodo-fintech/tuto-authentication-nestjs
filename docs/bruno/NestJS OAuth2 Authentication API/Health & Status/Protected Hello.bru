@@ -1,0 +1,23 @@
+meta {
+  name: Protected Hello
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Protected endpoint that requires JWT authentication
+}

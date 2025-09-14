@@ -1,0 +1,24 @@
+meta {
+  name: Microsoft OAuth - Callback
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{base_url}}/oauth/microsoft/callback?code={{auth_code}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  code: {{auth_code}}
+  ~error: 
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Handle Microsoft OAuth2 callback with authorization code to get JWT token
+}
